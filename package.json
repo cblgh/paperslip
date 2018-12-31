@@ -1,0 +1,23 @@
+{
+  "name": "paperslip",
+  "version": "1.0.0",
+  "description": "share snippets easily",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "p2p",
+    "share",
+    "dat",
+    "dht"
+  ],
+  "author": "cblgh",
+  "license": "ISC",
+  "dependencies": {
+    "@hyperswarm/network": "0.0.4",
+    "dedent": "^0.7.0",
+    "human-readable-ids": "^1.0.4",
+    "minimist": "^1.2.0"
+  }
+}
