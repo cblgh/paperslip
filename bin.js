@@ -12,7 +12,7 @@ var help = dedent`
       paperslip 35c3                              
       # Share a note in 35c3
       paperslip 35c3 --note "dat://7331..c001"    
-      # Pipe all your input to 35c3
+      # Pipe input to 35c3 with --stdin
       paperslip 35c3 --stdin                      
 
     Options:
