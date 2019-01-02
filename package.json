@@ -1,8 +1,11 @@
 {
   "name": "paperslip",
   "version": "1.0.0",
-  "description": "share snippets easily",
+  "description": "share snippets easily over wifi or internet",
   "main": "index.js",
+  "bin": {
+    "paperslip": "bin.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +20,7 @@
   "dependencies": {
     "@hyperswarm/network": "0.0.4",
     "dedent": "^0.7.0",
+    "duplexify": "^3.6.1",
     "human-readable-ids": "^1.0.4",
     "minimist": "^1.2.0"
   }
