@@ -1,5 +1,5 @@
 var minimist = require('minimist')
-var randomName = require('human-readable-ids').hri
+var namegiver = require('human-readable-ids').hri
 var dedent = require('dedent')
 var paperslip = require('./')
 
@@ -19,18 +19,18 @@ var help = dedent`
         --note <string>     Information to send to peers
         --stdin             Pipe standard input to peers 
 `
-
 var args = minimist(process.argv.slice(2))
-if ((!args.note && args._.length === 0) || args.help) {
+var stdin = (args.stdin || !process.stdin.isTTY)
+if (!stdin && (!args.note && args._.length === 0) || args.help) {
   process.stdout.write(help + '\n')
   process.exit(0)
 }
 
-var topic = randomName.random()
+var topic = namegiver.random()
 if (args._.length > 0) topic = args._[0]
 else process.stdout.write(`listening on ${topic}\n`) 
 
-if (args.note || args.stdin) {
+if (args.note || stdin) {
   paperslip.write(topic, args.note ? args.note + "" : process.stdin)
 } else {
   var stream = paperslip.read(topic, function onFinish () {
