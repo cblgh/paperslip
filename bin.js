@@ -20,8 +20,10 @@ var help = dedent`
         --stdin             Pipe standard input to peers 
 `
 var args = minimist(process.argv.slice(2), { alias: { 'n': 'note' } })
-var stdin = (args.stdin || !process.stdin.isTTY)
-if (!stdin && (!args.note && args._.length === 0) || args.help) {
+
+var incoming = (args.stdin || !process.stdin.isTTY)
+var argless = !args.note && args._.length === 0
+if (!incoming && argless || args.help) {
   process.stdout.write(help + '\n')
   process.exit(0)
 }
@@ -30,7 +32,7 @@ var topic = namegiver.random()
 if (args._.length > 0) topic = args._[0]
 else process.stdout.write(`listening on ${topic}\n`)
 
-if (args.note || stdin) {
+if (args.note || incoming) {
   paperslip.write(topic, args.note ? args.note + '' : process.stdin)
 } else {
   var stream = paperslip.read(topic, function onFinish () {
