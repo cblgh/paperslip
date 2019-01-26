@@ -1,7 +1,7 @@
 # paperslip
 share hard-to-transmit snippets with easy-to-pronounce names using dht magic
 
-### :warning: currently in development, soon to be npm published
+## Usage
 ```sh
 Usage: paperslip <name> [--note, --stdin]
 Examples:
