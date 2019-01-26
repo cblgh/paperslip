@@ -23,8 +23,8 @@ exports.read = function (topic, cb) {
     stream.setReadable(socket)
     // we have received everything
     socket.on('end', function () {
-        net.leave(topic)
-        cb()
+      net.leave(topic)
+      cb()
     })
   })
   return stream
@@ -37,7 +37,7 @@ exports.write = function (topic, data) {
   })
 
   net.on('connection', (socket, details) => {
-    process.stdout.write(`${Object.values(socket.address()).join(":")} connected\n`) 
+    process.stdout.write(`${Object.values(socket.address()).join(':')} connected\n`)
     var stream = data
     // we were passed a string note, encompass the data in a stream
     if (typeof data === 'string') {
