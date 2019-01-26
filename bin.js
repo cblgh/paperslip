@@ -19,7 +19,7 @@ var help = dedent`
         --note <string>     Information to send to peers
         --stdin             Pipe standard input to peers 
 `
-var args = minimist(process.argv.slice(2))
+var args = minimist(process.argv.slice(2), { alias: { "n": "note" }})
 var stdin = (args.stdin || !process.stdin.isTTY)
 if (!stdin && (!args.note && args._.length === 0) || args.help) {
   process.stdout.write(help + '\n')
