@@ -1,7 +1,7 @@
 var minimist = require('minimist')
 var namegiver = require('human-readable-ids').hri
 var dedent = require('dedent')
-var paperslip = require('./')
+var paperslip = require('./index.js')
 
 var help = dedent`
     Usage: paperslip <name> [--note, --stdin]
