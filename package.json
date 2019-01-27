@@ -1,6 +1,6 @@
 {
   "name": "paperslip",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "share snippets easily over wifi or internet",
   "main": "index.js",
   "bin": {
