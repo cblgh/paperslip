@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var minimist = require('minimist')
 var namegiver = require('human-readable-ids').hri
 var dedent = require('dedent')
