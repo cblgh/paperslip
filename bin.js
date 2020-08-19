@@ -31,10 +31,10 @@ if (!incoming && argless || args.help) {
 
 var topic = namegiver.random()
 if (args._.length > 0) topic = args._[0]
-else process.stdout.write(`listening on ${topic}\n`)
 
 if (args.note || incoming) {
-  paperslip.write(topic, args.note ? args.note + '' : process.stdin)
+  console.log(`listening on ${topic}\n`)
+  paperslip.write(topic, args.note ? args.note + '' : process.stdin, console.log)
 } else {
   var stream = paperslip.read(topic, function onFinish () {
     process.exit(0)

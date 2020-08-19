@@ -30,20 +30,20 @@ exports.read = function (topic, cb) {
   return stream
 }
 
-exports.write = function (topic, data) {
+exports.write = function (topic, data, log) {
+  if (!log) log = function () {}
   var net = initiate(topic, {
     lookup: true, // find & connect to peers
     announce: true // optional- announce self as a connection target
   })
 
   net.on('connection', (socket, details) => {
-    process.stdout.write(`${Object.values(socket.address()).join(':')} connected\n`)
+    log(`${Object.values(socket.address()).join(':')} connected\n`)
     var stream = data
     // we were passed a string note, encompass the data in a stream
     if (typeof data === 'string') {
       stream = new Readable()
       stream.push(data)
-      stream.push('\n')
       stream.push(null)
     }
     stream.pipe(socket)
