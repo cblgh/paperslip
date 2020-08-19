@@ -52,4 +52,9 @@ exports.write = function (topic, data, log) {
       socket.end()
     })
   })
+  return net
+}
+
+exports.stop = function (net) {
+    net.destroy()
 }
