@@ -6,12 +6,16 @@ var hyperswarm = require('hyperswarm')
 function initiate (topic, opts) {
   var net = hyperswarm()
   // look for peers listed under this topic
-  var topicBuffer = crypto.createHash('sha256')
-    .update(topic)
-    .digest()
+  var topicBuffer = buffer(topic)
   net.join(topicBuffer, opts)
   return net
 }
+function buffer (topic) {
+    return crypto.createHash('sha256')
+    .update(topic)
+    .digest()
+}
+
 
 exports.read = function (topic, cb) {
   var stream = duplexify()
@@ -23,7 +27,7 @@ exports.read = function (topic, cb) {
     stream.setReadable(socket)
     // we have received everything
     socket.on('end', function () {
-      net.leave(topic)
+      net.leave(buffer(topic))
       cb()
     })
   })
