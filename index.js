@@ -1,7 +1,7 @@
 var crypto = require('crypto')
 var Readable = require('stream').Readable
 var duplexify = require('duplexify')
-var hyperswarm = require('@hyperswarm/network')
+var hyperswarm = require('hyperswarm')
 
 function initiate (topic, opts) {
   var net = hyperswarm()

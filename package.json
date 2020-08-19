@@ -18,7 +18,6 @@
   "author": "cblgh",
   "license": "ISC",
   "dependencies": {
-    "@hyperswarm/network": "0.0.4",
     "dedent": "^0.7.0",
     "duplexify": "^3.6.1",
     "human-readable-ids": "^1.0.4",
