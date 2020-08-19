@@ -2,6 +2,16 @@
 share hard-to-transmit snippets with easy-to-pronounce names using dht magic
 
 ## Usage
+
+In one terminal:
+```sh
+paperslip testshare
+```
+In another terminal:
+```sh
+echo "hello from another terminal" | paperslip testshare --stdin
+```
+### More
 ```sh
 Usage: paperslip <name> [--note, --stdin]
 Examples:
