@@ -35,6 +35,8 @@ exports.read = function (topic, cb) {
       net.leave(hash(topic))
       cb()
     })
+    socket.on('error', err => { stream.destroy(err) })
+    net.on('error', err => { stream.destroy(err) })
   })
   return stream
 }
