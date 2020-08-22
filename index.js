@@ -22,6 +22,7 @@ function hash (topic) {
 
 
 exports.read = function (topic, cb) {
+  if (!cb) cb = function () {}
   const stream = duplexify()
   const net = initiate(topic, {
     lookup: true // find & connect to peers
@@ -47,7 +48,7 @@ exports.write = function (topic, data, log) {
 
   net.on('connection', (socket, details) => {
     log(`${Object.values(socket.address()).join(':')} connected\n`)
-    const stream = data
+    let stream = data
     // we were passed a string note, encompass the data in a stream
     if (typeof data === 'string') {
       stream = new Readable()
