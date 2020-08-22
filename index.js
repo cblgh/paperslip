@@ -49,7 +49,7 @@ exports.write = function (topic, data, log) {
   })
 
   net.on('connection', (socket, details) => {
-    log(`${Object.values(socket.address()).join(':')} connected\n`)
+    log(`${Object.values(socket.address()).join(':')} connected`)
     let stream = data
     // we were passed a string note, encompass the data in a stream
     if (typeof data === 'string') {
