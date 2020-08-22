@@ -1,25 +1,29 @@
-var crypto = require('crypto')
-var Readable = require('stream').Readable
-var duplexify = require('duplexify')
-var hyperswarm = require('hyperswarm')
+const hcrypto = require('hypercore-crypto')
+const crypto = require("crypto")
+const Readable = require('stream').Readable
+const duplexify = require('duplexify')
+const hyperswarm = require('hyperswarm')
 
 function initiate (topic, opts) {
-  var net = hyperswarm()
+  const net = hyperswarm()
   // look for peers listed under this topic
-  var topicBuffer = buffer(topic)
-  net.join(topicBuffer, opts)
+  // hash topic in a way which makes observing the DHT to derive the actual topic implausible
+  const topicHash = hash(topic) 
+  net.join(topicHash, opts)
   return net
 }
-function buffer (topic) {
-    return crypto.createHash('sha256')
-    .update(topic)
-    .digest()
+
+function hash (topic) {
+    const hash = crypto.createHash('sha256')
+        .update(topic)
+        .digest()
+    return hcrypto.discoveryKey(hash)
 }
 
 
 exports.read = function (topic, cb) {
-  var stream = duplexify()
-  var net = initiate(topic, {
+  const stream = duplexify()
+  const net = initiate(topic, {
     lookup: true // find & connect to peers
   })
 
@@ -27,7 +31,7 @@ exports.read = function (topic, cb) {
     stream.setReadable(socket)
     // we have received everything
     socket.on('end', function () {
-      net.leave(buffer(topic))
+      net.leave(hash(topic))
       cb()
     })
   })
@@ -36,14 +40,14 @@ exports.read = function (topic, cb) {
 
 exports.write = function (topic, data, log) {
   if (!log) log = function () {}
-  var net = initiate(topic, {
+  const net = initiate(topic, {
     lookup: true, // find & connect to peers
     announce: true // optional- announce self as a connection target
   })
 
   net.on('connection', (socket, details) => {
     log(`${Object.values(socket.address()).join(':')} connected\n`)
-    var stream = data
+    const stream = data
     // we were passed a string note, encompass the data in a stream
     if (typeof data === 'string') {
       stream = new Readable()

@@ -21,6 +21,7 @@
     "dedent": "^0.7.0",
     "duplexify": "^3.6.1",
     "human-readable-ids": "^1.0.4",
+    "hypercore-crypto": "^2.1.1",
     "hyperswarm": "^2.15.0",
     "minimist": "^1.2.0"
   }
