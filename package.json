@@ -6,6 +6,9 @@
   "bin": {
     "paperslip": "bin.js"
   },
+  "browser": {
+    "hyperswarm": "hyperswarm-web"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +26,7 @@
     "human-readable-ids": "^1.0.4",
     "hypercore-crypto": "^2.1.1",
     "hyperswarm": "^2.15.0",
+    "hyperswarm-web": "^2.1.1",
     "minimist": "^1.2.0"
   }
 }
